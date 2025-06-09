@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.ayni'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 
 java {
     toolchain {
@@ -64,6 +64,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard:2.2.10.RELEASE'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+
+    // Para subir imágenes (Cloudinary)
+    implementation 'com.cloudinary:cloudinary-http44:1.39.0'
 
     implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.0.2'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
