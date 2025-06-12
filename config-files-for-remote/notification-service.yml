@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: notification-service
+
+server:
+  port: 8094
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  jmx:
+    enabled: false
+
+# Eureka Client
+eureka:
+  instance:
+    appname: notification-service
+    instance-id: ${spring.application.name}:${random.value}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka
+
+resilience4j.circuitbreaker:
+  instances:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+# Management endpoints
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Twilio configuration
+twilio:
+  account:
+    sid: ${TWILIO_ACCOUNT_SID}
+    token: ${TWILIO_AUTH_TOKEN}
+  phone:
+    number: ${TWILIO_PHONE_NUMBER}
+  whatsappNumber: ${TWILIO_WHATSAPP_NUMBER}
