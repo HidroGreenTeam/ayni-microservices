@@ -1,2 +1,39 @@
-.vscode/
+# Global .gitignore for all microservices
+
+# Build and IDE folders
 .gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Java/Gradle
+bin/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Spring Tool Suite
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# Syste
+.DS_Store
+Thumbs.db
+
+# Others
+HELP.md
