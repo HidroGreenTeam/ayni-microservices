@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.4'
+    id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -9,7 +9,7 @@ version = '0.0.3-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
@@ -20,8 +20,8 @@ configurations {
 }
 
 ext {
-    set('springBootAdminVersion', "3.3.3")
-    set('springCloudVersion', "2022.0.3")
+    set('springBootAdminVersion', "3.3.4")
+    set('springCloudVersion', "2023.0.3")
 }
 
 dependencies {
@@ -39,37 +39,35 @@ dependencies {
     implementation 'de.codecentric:spring-boot-admin-starter-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.2.8.RELEASE'
+    // Sleuth ha sido reemplazado por Micrometer Tracing en Spring Boot 3
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
     implementation 'com.paypal.sdk:rest-api-sdk:1.14.0'
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'javax.servlet:javax.servlet-api:4.0.1'
-    implementation 'org.json:json:20210307'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    // javax.servlet ha sido reemplazado por jakarta.servlet en Spring Boot 3
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    implementation 'org.json:json:20240303'
+    implementation 'org.apache.httpcomponents.client5:httpclient5'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.10.RELEASE'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard:2.2.10.RELEASE'
+    // Hystrix ha sido deprecado, reemplazado por Circuit Breaker
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-
-
     // Para subir imágenes (Cloudinary)
     implementation 'com.cloudinary:cloudinary-http44:1.39.0'
 
-    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.0.2'
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.2.0'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 }
