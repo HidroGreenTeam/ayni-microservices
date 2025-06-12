@@ -20,16 +20,26 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.postgresql:postgresql'
+    runtimeOnly 'com.mysql:mysql-connector-j'  // MySQL Driver
     
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    // Spring Boot Mail para envío de emails
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+      implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'de.codecentric:spring-boot-admin-starter-client:3.3.4'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    
+    // Twilio SDK para SMS/WhatsApp (OPCIONAL por ahora)
+    implementation 'com.twilio.sdk:twilio:9.14.1'
     
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    
+      implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+    
+    // Jakarta Annotations for @PostConstruct and other annotations
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -42,4 +52,4 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
-} 
+}
